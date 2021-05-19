@@ -1,0 +1,15 @@
+mat-sidenav-container, mat-sidenav-content, mat-sidenav{
+  height: 100%;
+
+}
+
+mat-sidenav{
+  width: 250px;
+}
+
+
+#mapa-mapbox{
+  height: 100%;
+  width: 100%;
+  background-color: red;
+}

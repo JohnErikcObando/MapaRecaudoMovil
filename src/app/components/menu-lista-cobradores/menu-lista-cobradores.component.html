@@ -1,0 +1,8 @@
+<mat-nav-list>
+
+  <a mat-list-item routerLink="/" (click)="onCerrarMenu()" *ngFor="let tblusuario of tblusuarios">
+    <mat-icon>person</mat-icon>
+    <span class="navegacion-list-label">{{tblusuario.nombre}}</span>
+  </a>
+
+</mat-nav-list>
