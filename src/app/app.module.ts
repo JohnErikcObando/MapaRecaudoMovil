@@ -11,6 +11,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { MenuListaCobradoresComponent } from './components/menu-lista-cobradores/menu-lista-cobradores.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormatoFechaPipe } from './pipes/formato-fecha.pipe';
+
 
 @NgModule({
   declarations: [
@@ -18,14 +21,18 @@ import { HttpClientModule } from '@angular/common/http';
     MapaComponent,
     HomeComponent,
     MenuListaCobradoresComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    FormatoFechaPipe,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [],

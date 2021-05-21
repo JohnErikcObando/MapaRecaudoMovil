@@ -12,15 +12,13 @@ export class ListaCobradoresService {
   // ruta principal para conectarce al servidor
   private baseUrl = environment.baseUrl;
 
-  private cobradores: TblusuarioModel[] = [];
-
   constructor(private http: HttpClient) { }
 
-  listaCobradores() {
+  getCobradores() {
     return this.http.get(this.baseUrl + '/api/posicion/lstUsuario')
       .pipe(
         map((resp: TblusuarioModel[]) =>
-          resp.map(cobrador => ({ id: cobrador.ID, nombre: cobrador.NOMBRES +' '+ cobrador.APELLIDOS })
+          resp.map(cobrador => ({ id: cobrador.ID, nombre: cobrador.NOMBRES + ' ' + cobrador.APELLIDOS })
           )
         )
       );

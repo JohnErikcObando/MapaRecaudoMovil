@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ListaCobradoresService } from '../../services/lista-cobradores.service';
 import { TblusuarioModel } from '../../models/tblusuario.models';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-menu-lista-cobradores',
@@ -15,11 +16,15 @@ export class MenuListaCobradoresComponent implements OnInit {
 
   @Output() menuToggle = new EventEmitter<void>();
 
+  // para conener la fecha actual
+  fecha = new FormControl(new Date());
+
+
   constructor(private listaCobradoresService: ListaCobradoresService) { }
 
   ngOnInit(): void {
 
-    this.listaCobradoresService.listaCobradores()
+    this.listaCobradoresService.getCobradores()
       .subscribe(cobradores => {
         this.tblusuarios = cobradores;
 
@@ -27,9 +32,13 @@ export class MenuListaCobradoresComponent implements OnInit {
 
   }
 
-
+  // cerrar el menu de lista cobradores
   onCerrarMenu() {
     this.menuToggle.emit();
+  }
+
+  consultar(){
+
   }
 
 }

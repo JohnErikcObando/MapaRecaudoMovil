@@ -1,8 +1,26 @@
 <mat-nav-list>
 
-  <a mat-list-item routerLink="/" (click)="onCerrarMenu()" *ngFor="let tblusuario of tblusuarios">
-    <mat-icon>person</mat-icon>
-    <span class="navegacion-list-label">{{tblusuario.nombre}}</span>
+  <form>
+
+    <div class="datePiker">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="fecha" disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled=false></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+  </form>
+
+  <a mat-list-item (click)="onCerrarMenu()" *ngFor="let tblusuario of tblusuarios">
+    <button class="buttonList" mat-stroked-button flex="300" color="primary">
+      <mat-icon>person </mat-icon>{{tblusuario.nombre}}
+    </button>
   </a>
+
+
 
 </mat-nav-list>
