@@ -1,26 +1,25 @@
 <mat-nav-list>
 
-  <form>
+  <form class="datePiker" [formGroup]="form" (ngSubmit)="consultarPagos('1801','2020-12-07')">
 
-    <div class="datePiker">
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha Pago</mat-label>
+      <input  matInput
+              [matDatepicker]="picker3"
+              [formControl]="fecha">
 
-      <mat-form-field appearance="fill">
-        <mat-label>Fecha</mat-label>
-        <input matInput [matDatepicker]="picker" [formControl]="fecha" disabled>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker disabled=false></mat-datepicker>
-      </mat-form-field>
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3 formGroupName="fecha" ></mat-datepicker>
+    </mat-form-field>
 
-    </div>
+
+    <a mat-list-item (click)="onCerrarMenu(tblusuario.nombre)" *ngFor="let tblusuario of tblusuarios">
+      <button type="submit" class="buttonList" mat-stroked-button flex="300" color="primary">
+        <mat-icon>person </mat-icon>
+          {{tblusuario.nombre}}
+      </button>
+    </a>
 
   </form>
-
-  <a mat-list-item (click)="onCerrarMenu()" *ngFor="let tblusuario of tblusuarios">
-    <button class="buttonList" mat-stroked-button flex="300" color="primary">
-      <mat-icon>person </mat-icon>{{tblusuario.nombre}}
-    </button>
-  </a>
-
-
 
 </mat-nav-list>

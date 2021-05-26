@@ -1,0 +1,17 @@
+<form [formGroup]="form" (ngSubmit)=consultarPagos(date.value)>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Value binding</mat-label>
+    <input  matInput
+            [matDatepicker]="picker3"
+            [value]="date.value"
+            formGroupName="fecha"
+            disabled>
+    <mat-datepicker-toggle matSuffix [for]="picker3" disabled=false></mat-datepicker-toggle>
+    <mat-datepicker #picker3 disabled=false></mat-datepicker>
+  </mat-form-field>
+
+
+  <button type="submit">cargar</button>
+
+</form>

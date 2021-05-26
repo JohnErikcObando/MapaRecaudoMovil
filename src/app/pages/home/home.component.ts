@@ -9,9 +9,7 @@ import { FormControl } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
 
-  fecha1 : Date = new Date();
 
-  fecha2 = new FormControl(new Date());
 
   ngOnInit(): void {
 
