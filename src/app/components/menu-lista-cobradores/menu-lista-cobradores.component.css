@@ -2,6 +2,7 @@
   width: 500px;
   text-align: left;
   margin-top: 30px;
+  flex: auto;
 }
 
 .datePiker {

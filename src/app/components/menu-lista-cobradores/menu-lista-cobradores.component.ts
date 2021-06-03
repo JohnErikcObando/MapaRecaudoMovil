@@ -1,27 +1,39 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ListaCobradoresService } from '../../services/lista-cobradores.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { PosicionIstUser } from 'src/app/models/PosicionlstUser.models';
+import { TblusuarioModel } from 'src/app/models/tblusuario.models';
+
+// import { Moment } from 'moment';
+import * as _moment from 'moment';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-menu-lista-cobradores',
   templateUrl: './menu-lista-cobradores.component.html',
   styleUrls: ['./menu-lista-cobradores.component.css']
 })
-export class MenuListaCobradoresComponent implements OnInit {
+export class MenuListaCobradoresComponent implements OnInit, OnDestroy {
 
-  tblusuarios: any[] = [];
-  coordenadas: any[] = [];
+  tblusuarios: TblusuarioModel[] = [];
+  coordenadas: PosicionIstUser[] = [];
 
   @Output() menuToggle = new EventEmitter<void>();
 
   // para conener la fecha actual
-  fecha = new FormControl(new Date());
+  // fecha = new FormControl(new Date());
+  fecha = new Date();
+
   form: FormGroup;
+
+  moment = _moment;
+
+  private usuarioConsulta: String;
+  private fechaConsulta: String;
 
   constructor(private listaCobradoresService: ListaCobradoresService,
     private fb: FormBuilder) {
-
-    console.log('este es el constructor');
 
   }
 
@@ -32,11 +44,16 @@ export class MenuListaCobradoresComponent implements OnInit {
 
   }
 
+  ngOnDestroy(): void {
+
+  }
+
   // cerrar el menu de lista cobradores
   onCerrarMenu(usuario: String) {
 
     this.menuToggle.emit();
-    console.log('este es el cobrador:', usuario);
+    console.log('cobrador seleccionado:', usuario);
+    this.usuarioConsulta = usuario;
 
   }
 
@@ -44,7 +61,7 @@ export class MenuListaCobradoresComponent implements OnInit {
   listaUsuario() {
 
     this.listaCobradoresService.getCobradores()
-      .subscribe(cobradores => {
+      .subscribe((cobradores: any) => {
         this.tblusuarios = cobradores;
       });
 
@@ -58,18 +75,19 @@ export class MenuListaCobradoresComponent implements OnInit {
     });
   }
 
-  consultarPagos(usuario: string, fecha: string) {
 
-    console.log('usuario:', usuario, 'fecha:', fecha);
+  consultarPagos() {
 
-    this.listaCobradoresService.obtenerCordenadas(usuario, fecha)
+    this.fechaConsulta = moment(this.form.get('fecha').value).format("yyyy-MM-DD");
+
+    console.log('conusltar Pagos usuario:', this.usuarioConsulta, 'fecha:', this.fechaConsulta);
+
+    this.listaCobradoresService.obtenerCordenadas(this.usuarioConsulta, this.fechaConsulta)
       .subscribe((resp: any) => {
         this.coordenadas = resp;
         localStorage.setItem('listapagos', JSON.stringify(resp));
         console.log('este es consulta pagos', this.coordenadas);
       });
-
   }
-
 
 }

@@ -10,9 +10,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
-
-
+import { MatNativeDateModule, MAT_DATE_FORMATS } from '@angular/material/core';
 
 @NgModule({
 
@@ -38,7 +36,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule
-  ],
+  ]
+
 })
 
 export class MaterialModule { }
