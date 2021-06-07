@@ -7,7 +7,11 @@
       <input matInput
              [matDatepicker]="dp"
              displayFormat="YYYY MM DD"
+<<<<<<< HEAD
              value="{{ fecha }}"
+=======
+             value="{{ fecha | date:'yyyy-MM-dd'}}"
+>>>>>>> 7fc8ec5ac3b9bee92f14bdf19f00937e6ff72c84
              formControlName="fecha">
 
       <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>

@@ -30,11 +30,19 @@ export class MapaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.mapBox();
     this.AgregarMarcadores();
     // this.LimpiarCoordenadas();
 
+<<<<<<< HEAD
+=======
   }
+
+  ngOnDestroy(): void {
+    this.mapBox();
+>>>>>>> 7fc8ec5ac3b9bee92f14bdf19f00937e6ff72c84
+  }
+
+
 
   mapBox() {
 
@@ -52,10 +60,21 @@ export class MapaComponent implements OnInit {
 
   AgregarMarcadores() {
 
+<<<<<<< HEAD
+=======
+    this.mapBox();
+
+>>>>>>> 7fc8ec5ac3b9bee92f14bdf19f00937e6ff72c84
     // LISTADO DE COORDENADAS GUARDADAS EN EL LOCALSTORANGE DE CADA COBRADOR
     this.coordenadasPagos = JSON.parse(localStorage.getItem('listapagos'));
 
     console.log('este es lo del local storange', this.coordenadasPagos);
+<<<<<<< HEAD
+
+
+    //VERIFICA SI LA VARIABLE ES DIFERENTE DE NULL
+    // if (!this.coordenadasPagos == null) {
+=======
 
 
     //VERIFICA SI LA VARIABLE ES DIFERENTE DE NULL
@@ -64,9 +83,20 @@ export class MapaComponent implements OnInit {
     // GENERANDO MARCADOR A CADA PAGO Y NOVEDAD EN EL LISTADOPAGOS
     this.coordenadasPagos.forEach(item => {
 
+      this.crearMarcador(item.Posy, item.PosX, item.Tipo);
+      console.log('POSIDION X: ', item.PosX, ' POSIDION Y: ', item.Posy, ' TIPO: ', item.Tipo);
+>>>>>>> 7fc8ec5ac3b9bee92f14bdf19f00937e6ff72c84
+
+    // GENERANDO MARCADOR A CADA PAGO Y NOVEDAD EN EL LISTADOPAGOS
+    this.coordenadasPagos.forEach(item => {
+
       this.crearMarcador(item.Posy, item.PosX, item.Tipo, item.IdContrato, item.Nombre, item.Valor);
       // console.log('POSIDION X: ', item.PosX, ' POSIDION Y: ', item.Posy, ' TIPO: ', item.Tipo);
     });
+
+    this.LimpiarCoordenadas();
+
+    // }
 
   }
 
@@ -80,6 +110,7 @@ export class MapaComponent implements OnInit {
       this.color = 'black'
     }
 
+<<<<<<< HEAD
     // AGREGAR MARCADORES AL MAPBOX
     // if (lng > 0 && lat > 0) {
 
@@ -98,6 +129,26 @@ export class MapaComponent implements OnInit {
 
     // }
 
+=======
+    // COLOR DEL MARCADO RESPECTO AL TIPO
+    if (tipo === "PAGO") {
+      this.color = 'red';
+    } else {
+      this.color = 'black'
+    }
+
+    // AGREGAR MARCADORES AL MAPBOX
+    // if (lng > 0 && lat > 0) {
+    const marker1 = new Mapboxgl.Marker({ color: this.color })
+      .setLngLat([lng, lat])
+      .addTo(this.mapa);
+    // }
+
+  }
+
+  LimpiarCoordenadas() {
+    localStorage.removeItem('listapagos');
+>>>>>>> 7fc8ec5ac3b9bee92f14bdf19f00937e6ff72c84
   }
 
   // LimpiarCoordenadas() {
