@@ -46,7 +46,7 @@ export class MapaComponent implements OnInit {
       container: 'mapa-mapbox', // container id
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [-75.5855149, 8.4192527], // LONGITUD , LATITUD
-      zoom: 15 // starting zoom
+      zoom: 5 // starting zoom
 
     });
   }
@@ -66,20 +66,14 @@ export class MapaComponent implements OnInit {
     // GENERANDO MARCADOR A CADA PAGO Y NOVEDAD EN EL LISTADOPAGOS
     this.coordenadasPagos.forEach(item => {
 
-      this.crearMarcador(item.Posy, item.PosX, item.Tipo);
+      this.crearMarcador(item.Posy, item.PosX, item.Tipo, item.IdContrato, item.Nombre, item.Valor);
       console.log('POSIDION X: ', item.PosX, ' POSIDION Y: ', item.Posy, ' TIPO: ', item.Tipo);
 
     });
 
-    this.LimpiarCoordenadas();
-    this.mapBox();
-
-
-    // }
-
   }
 
-  crearMarcador(lng: number, lat: number, tipo: string) {
+  crearMarcador(lng: number, lat: number, tipo: string, contrato: string, nombre: string, valor: number) {
 
     // COLOR DEL MARCADO RESPECTO AL TIPO
     if (tipo === "PAGO") {
@@ -88,17 +82,26 @@ export class MapaComponent implements OnInit {
       this.color = 'black'
     }
 
+    // create the popup
+    var popup = new Mapboxgl.Popup({ offset: 25 }).setText(
+      'Tipo: ' + tipo + '  '+
+      ' Contrato:' + contrato +
+      ' Nombre: ' +nombre +
+      ' Valor: $'+ valor
+    );
+
     // AGREGAR MARCADORES AL MAPBOX
     // if (lng > 0 && lat > 0) {
     const marker1 = new Mapboxgl.Marker({ color: this.color })
       .setLngLat([lng, lat])
+      .setPopup(popup) // sets a popup on this marker
       .addTo(this.mapa);
     // }
 
   }
 
-  LimpiarCoordenadas() {
-    localStorage.removeItem('listapagos');
-  }
+  // LimpiarCoordenadas() {
+  //   localStorage.removeItem('listapagos');
+  // }
 
 }
