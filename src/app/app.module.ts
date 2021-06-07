@@ -13,7 +13,6 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormatoFechaPipe } from './pipes/formato-fecha.pipe';
-import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 
 @NgModule({
@@ -23,8 +22,7 @@ import { DatePickerComponent } from './components/date-picker/date-picker.compon
     HomeComponent,
     MenuListaCobradoresComponent,
     ToolbarComponent,
-    FormatoFechaPipe,
-    DatePickerComponent,
+    FormatoFechaPipe
 
   ],
   imports: [

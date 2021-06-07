@@ -1,4 +1,10 @@
 #mapa-mapbox {
   height: 100%;
   width: 100%;
+  bottom: 0;
+}
+
+
+.mapboxgl-popup {
+  max-width: 200px;
 }

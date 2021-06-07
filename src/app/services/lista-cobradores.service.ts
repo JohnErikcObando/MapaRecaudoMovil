@@ -29,60 +29,27 @@ export class ListaCobradoresService {
     return this.http.get(this.baseUrl + '/api/posicion/lstUsuario')
       .pipe(
         map((resp: TblusuarioModel[]) =>
-          resp.map(cobrador => ({ USERNAME: cobrador.USERNAME, nombre: cobrador.NOMBRES + ' ' + cobrador.APELLIDOS })
+          resp.map(cobrador => ({ username: cobrador.USERNAME, nombre: cobrador.NOMBRES + ' ' + cobrador.APELLIDOS })
           )
         )
       );
   }
 
 
- private getHeaders(): HttpHeaders {
-  const headers = new HttpHeaders({
+  private getHeaders(): HttpHeaders {
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json'
-  });
+    });
 
-  return headers;
-}
-
-
-  obtenerCordenadas(usuario: string, fecha :string) {
-
-    // let params = new HttpParams().append('usuario', '1801');
-    // params.append('fecha', '2021-04-28')
+    return headers;
+  }
 
 
-    // const headers = new HttpHeaders({
-    //   Usuario: '1801',
-    //   Fecha: '2021-04-28'
-    // })
-
-    // const headers = { 'content-type': '/application/json'}
-    // const body=JSON.stringify({
-    //   Usuario: '1801',
-    //   Fecha: '2021-04-28'
-    // });
-
-    // return this.http.post(this.baseUrl + '/api/posicion/lstUser', {
-    //   Usuario: '1801',
-    //   Fecha: '2021-04-28'
-    // })
-
-    // const headers = { 'content-type': 'application/json'}
-    // const body=JSON.stringify({
-    //    Usuario: '1801',
-    //    Fecha: '2021-04-28'
-    // });
-    // console.log(body)
-    // return this.http.post(this.baseUrl + '/api/posicion/lstUser' , body ,{'headers':headers})
+  obtenerCordenadas(usuario: String, fecha: String) {
 
     let headers = this.getHeaders();
-
-    return this.http.post(this.baseUrl + '/api/posicion/lstUser',  {usuario, fecha},{ headers })
-
-
+    return this.http.post(this.baseUrl + '/api/posicion/lstUser', { usuario, fecha }, { headers })
   }
 
 }
 
-
-// Id: resp.Id, posx: resp.PosX, posy: resp.Posy, tipo: resp.Tipo, Idcontrato: resp.IdContrato, valor: resp.Valor
