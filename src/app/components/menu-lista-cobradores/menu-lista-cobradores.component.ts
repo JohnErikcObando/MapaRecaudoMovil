@@ -4,12 +4,8 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { PosicionIstUser } from 'src/app/models/PosicionlstUser.models';
 import { TblusuarioModel } from 'src/app/models/tblusuario.models';
 
-<<<<<<< HEAD
-// import moment paa formatear fecha
-=======
 // import { Moment } from 'moment';
 import * as _moment from 'moment';
->>>>>>> 7fc8ec5ac3b9bee92f14bdf19f00937e6ff72c84
 import * as moment from 'moment';
 
 
@@ -31,11 +27,7 @@ export class MenuListaCobradoresComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
 
-<<<<<<< HEAD
-  moment = moment;
-=======
   moment = _moment;
->>>>>>> 7fc8ec5ac3b9bee92f14bdf19f00937e6ff72c84
 
   private usuarioConsulta: String;
   private fechaConsulta: String;
