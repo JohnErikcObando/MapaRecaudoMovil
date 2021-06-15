@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import * as mapboxgl from 'mapbox-gl';
 
 import { ListaCobradoresService } from '../../services/lista-cobradores.service';
-import { reduce } from 'rxjs/operators';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { DatosConsultaService } from '../../services/datos-consulta.service';
+import { TblusuarioModel } from 'src/app/models/tblusuario.models';
+import { PosicionIstUser } from 'src/app/models/PosicionlstUser.models';
 
 
 
@@ -16,27 +17,33 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class MapaComponent implements OnInit {
 
+
+  @Output() menuToggle = new EventEmitter<void>();
+
+
   mapa: mapboxgl.Map;
 
   lng: string;
   lat: string;
   color: string;
 
-
   coordenadasPagos: any = [];
 
+  constructor(private listaCobradoresService: ListaCobradoresService,
+    public datosConsultaService: DatosConsultaService) { }
 
-  constructor(private listaCobradoresService: ListaCobradoresService) { }
+
 
   ngOnInit(): void {
 
     this.mapBox();
     this.AgregarMarcadores();
-    // this.LimpiarCoordenadas();
 
   }
 
-
+  ngOnDestroy() {
+    this.mapBox();
+  }
 
   mapBox() {
 
@@ -51,16 +58,15 @@ export class MapaComponent implements OnInit {
     });
   }
 
-  mapDireccion(){
+  mapDireccion() {
 
     mapboxgl.addControl(
       new mapboxgl.MapboxDirections({
-          accessToken: mapboxgl.accessToken
+        accessToken: mapboxgl.accessToken
       }),
       'top-left'
-  );
+    );
   }
-
 
 
   AgregarMarcadores() {
@@ -68,22 +74,21 @@ export class MapaComponent implements OnInit {
     // LISTADO DE COORDENADAS GUARDADAS EN EL LOCALSTORANGE DE CADA COBRADOR
     this.coordenadasPagos = JSON.parse(localStorage.getItem('listapagos'));
 
-    console.log('este es lo del local storange', this.coordenadasPagos);
-
-
-    //VERIFICA SI LA VARIABLE ES DIFERENTE DE NULL
-    // if (!this.coordenadasPagos == null) {
+    // console.log('este es lo del local storange', this.coordenadasPagos);
 
     // GENERANDO MARCADOR A CADA PAGO Y NOVEDAD EN EL LISTADOPAGOS
     this.coordenadasPagos.forEach(item => {
 
       this.crearMarcador(item.Posy, item.PosX, item.Tipo, item.IdContrato, item.Nombre, item.Valor);
-      this.mapDireccion();
-      console.log('POSIDION X: ', item.PosX, ' POSIDION Y: ', item.Posy, ' TIPO: ', item.Tipo);
+      // console.log('POSIDION X: ', item.PosX, ' POSIDION Y: ', item.Posy, ' TIPO: ', item.Tipo);
 
     });
 
+    console.log('estoy en el mapa');
+
+
   }
+
 
   crearMarcador(lng: number, lat: number, tipo: string, contrato: string, nombre: string, valor: number) {
 
@@ -96,23 +101,40 @@ export class MapaComponent implements OnInit {
 
     // create the popup
     var popup = new mapboxgl.Popup({ offset: 25 }).setText(
-      'Tipo: ' + tipo + '  '+
+      'Tipo: ' + tipo + '  ' +
       ' Contrato:' + contrato +
-      ' Nombre: ' +nombre +
-      ' Valor: $'+ valor
+      ' Nombre: ' + nombre +
+      ' Valor: $' + valor
     );
 
     // AGREGAR MARCADORES AL MAPBOX
 
-    const marker1 = new mapboxgl.Marker({ color: this.color })
+    const marker = new mapboxgl.Marker({ color: this.color })
       .setLngLat([lng, lat])
       .setPopup(popup) // sets a popup on this marker
       .addTo(this.mapa);
   }
 
+  tblusuarios: TblusuarioModel[];
+  coordenadas: PosicionIstUser[];
 
-  // LimpiarCoordenadas() {
-  //   localStorage.removeItem('listapagos');
-  // }
+  usuarioConsulta: string;
+  fechaConsulta: string;
+
+    // Consultar los pagos del cobrador seleccionado
+    consultarPagos() {
+
+
+      // console.log('conusltar Pagos usuario:', this.usuarioConsulta, 'fecha:', this.fechaConsulta);
+
+      this.listaCobradoresService.obtenerCordenadas(this.usuarioConsulta, this.fechaConsulta)
+        .subscribe((resp: any) => {
+          this.coordenadas = resp;
+          // console.log('este es consulta pagos', resp);
+          localStorage.setItem('listapagos', JSON.stringify(resp));
+          console.log('este es consulta pagos', this.coordenadas);
+        });
+
+    }
 
 }

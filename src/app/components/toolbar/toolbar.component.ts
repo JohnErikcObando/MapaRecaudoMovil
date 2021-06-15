@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -15,7 +16,8 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onMenuToggleDispatch(){
+  // Control de manejo del menu toolbar despliegue
+  onMenuToggleDispatch() {
     this.menuToggle.emit();
   }
 

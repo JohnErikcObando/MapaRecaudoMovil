@@ -5,8 +5,10 @@ import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
 
-  {path:'', component: MapaComponent},
-  {path:'home', component: HomeComponent}
+  // {path:'', component: MapaComponent},
+  {path:'home', component: HomeComponent},
+  {path:'mapa', component: MapaComponent},
+  {path: '**', pathMatch: 'full', redirectTo:'home'}
 
 ];
 
