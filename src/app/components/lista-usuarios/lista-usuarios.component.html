@@ -1,0 +1,31 @@
+<mat-nav-list>
+
+  <form class="datePiker" [formGroup]="form">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha Recaudo</mat-label>
+      <input matInput [matDatepicker]="dp"
+            displayFormat="YYYY MM DD"
+            value="{{ fecha }}"
+            formControlName="fecha">
+
+      <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+      <mat-datepicker #dp></mat-datepicker>
+    </mat-form-field>
+
+    <mat-dialog-content class="mat-typography">
+      <button type="submit"
+              (click)="onCerrarMenu(tblusuario.username, tblusuario.nombre)"
+              (click)="sendMessage(tblusuario.nombre)"
+              *ngFor="let tblusuario of tblusuarios"
+              class="buttonList"
+              mat-stroked-button
+              color="primary">
+        <mat-icon>person </mat-icon>
+        {{tblusuario.nombre}}
+      </button>
+    </mat-dialog-content>
+
+  </form>
+
+</mat-nav-list>

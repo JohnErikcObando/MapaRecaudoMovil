@@ -1,24 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-// Components
-import { MapaComponent } from './mapa/mapa.component';
-import { MenuListaCobradoresComponent } from './menu-lista-cobradores/menu-lista-cobradores.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 
+// Components
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import { MapboxComponent } from './mapbox/mapbox.component';
+import { MenuComponent } from './menu/menu.component';
+import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
+
+
+
 
 
 @NgModule({
   declarations: [
-    MapaComponent,
-    MenuListaCobradoresComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    MapboxComponent,
+    MenuComponent,
+    ListaUsuariosComponent
   ],
   imports: [
     CommonModule,
@@ -27,11 +29,13 @@ import { BrowserModule } from '@angular/platform-browser';
     MaterialModule,
     AppRoutingModule,
     BrowserModule
+
   ],
   exports: [
-    MapaComponent,
-    MenuListaCobradoresComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    MenuComponent,
+    ListaUsuariosComponent,
+    MapboxComponent
   ]
 })
 export class ComponentsModule { }

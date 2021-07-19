@@ -1,4 +1,3 @@
-import { PosicionIstUser } from './PosicionlstUser.models'
 
 export class coordenadas {
   Id: string;
@@ -8,5 +7,4 @@ export class coordenadas {
   Nombre: string;
   IdContrato: string;
   Valor: number;
-  items: ListaCoor[];
 }

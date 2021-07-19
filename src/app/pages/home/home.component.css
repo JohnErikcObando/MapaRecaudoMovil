@@ -6,7 +6,8 @@ mat-sidenav {
 }
 
 mat-sidenav {
-  width: 400px;
+  position: absolute;
+  width: 360px;
 }
 
 main{
@@ -17,5 +18,9 @@ main{
 #mapa-mapbox {
   height: 100%;
   width: 100%;
+}
+
+h1{
+  text-align: right;
 }
 

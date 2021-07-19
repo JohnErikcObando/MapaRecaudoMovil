@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MapaComponent } from 'src/app/components/mapa/mapa.component';
+import { Component, ViewChild } from '@angular/core';
 
 
 @Component({
@@ -7,19 +6,9 @@ import { MapaComponent } from 'src/app/components/mapa/mapa.component';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  @ViewChild(MapaComponent) mapa: MapaComponent;
+  constructor() { }
 
-
- // Inicia el papa al cerrar el menu de usuarios
-  cargarMapa() {
-    this.mapa.ngOnInit();
-  }
-
-  ngOnInit(): void {
-
-
-  }
 
 }

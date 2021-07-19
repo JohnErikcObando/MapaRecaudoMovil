@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +26,9 @@ export class ListaCobradoresService {
 
   constructor(private http: HttpClient) { }
 
+  // consultar los usuarios
   getCobradores() {
+
     return this.http.get(this.baseUrl + '/api/posicion/lstUsuario')
       .pipe(
         map((resp: TblusuarioModel[]) =>
@@ -33,23 +36,33 @@ export class ListaCobradoresService {
           )
         )
       );
+
   }
 
 
   private getHeaders(): HttpHeaders {
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
     return headers;
+
   }
 
-
+  //  consultar cordenadas por usuario
   obtenerCordenadas(usuario: String, fecha: String) {
 
     let headers = this.getHeaders();
     return this.http.post(this.baseUrl + '/api/posicion/lstUser', { usuario, fecha }, { headers })
+
+  }
+
+  // consultar cuadre de caja por usuario
+  obtenerCuadreCaja(DATO: String, fecha: String) {
+
+    let headers = this.getHeaders();
+    return this.http.post(this.baseUrl + '/api/cuadre/cuadre', { DATO, fecha }, { headers });
   }
 
 }
-

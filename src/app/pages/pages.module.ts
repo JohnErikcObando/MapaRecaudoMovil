@@ -6,11 +6,13 @@ import { ComponentsModule } from '../components/components.module';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from '../material.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { MapaComponent } from './mapa/mapa.component';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    MapaComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { AppRoutingModule } from '../app-routing.module';
     AppRoutingModule
   ],
   exports: [
-    HomeComponent
+    HomeComponent,
+    MapaComponent
   ],
 })
 export class PagesModule { }

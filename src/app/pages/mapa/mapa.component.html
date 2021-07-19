@@ -1,0 +1,34 @@
+<mat-drawer-container class="container">
+
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <app-lista-usuarios (click)="drawer.toggle()" (click)="btnCobradores=!btnCobradores"
+      (messageEvent)="receiveMessage($event)"></app-lista-usuarios>
+  </mat-drawer>
+
+  <mat-drawer-content class="content">
+
+    <app-mapbox [coordenadasPagos]="coordenadasPagos"></app-mapbox>
+
+    <mat-card id="Card" *ngIf="btnCobradores">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon color="primary">person</mat-icon>
+          Cobrador:
+          {{cobrador }}
+
+          <mat-icon color="primary">event</mat-icon>
+          Fecha:
+          {{fecha}}
+
+        </mat-card-title>
+        <mat-card-subtitle> {{ cuadre }} </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <button *ngIf="btnCobradores" mat-mini-fab color="primary" id="listaCobrador" (click)="btnCobradores=!btnCobradores"
+      (click)="drawer.toggle()">
+      <mat-icon>people_alt</mat-icon>
+    </button>
+
+  </mat-drawer-content>
+</mat-drawer-container>
